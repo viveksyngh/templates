@@ -1,0 +1,2 @@
+language: java
+fprocess: java -classpath ./libs/com.openfaas.jar:./build/libs/java8-gradle.jar App
