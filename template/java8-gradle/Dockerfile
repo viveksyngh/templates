@@ -27,7 +27,7 @@ USER app
 
 ENV upstream_url="http://127.0.0.1:8081"
 ENV mode="http"
-ENV fprocess="java -classpath ./libs/com.openfaas.jar:./build/libs/java8-gradle.jar App"
+ENV fprocess="java -classpath './libs/*:./build/libs/*' App"
 
 HEALTHCHECK --interval=2s CMD [ -e /tmp/.lock ] || exit 1
 

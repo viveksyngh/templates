@@ -4,6 +4,8 @@ import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
 import java.net.InetSocketAddress;
 
 import com.openfaas.Handler;
@@ -22,8 +24,22 @@ public class App {
     static class FunctionHandler implements HttpHandler {
         @Override
         public void handle(HttpExchange t) throws IOException {
+            String requestBody = "";
+            String method = t.getRequestMethod();
+
+            if (method.equalsIgnoreCase("POST")) {
+		InputStream inputStream = t.getRequestBody();
+		ByteArrayOutputStream result = new ByteArrayOutputStream();
+		byte[] buffer = new byte[1024];
+		int length;
+		while ((length = inputStream.read(buffer)) != -1) {
+		    result.write(buffer, 0, length);
+		}
+		// StandardCharsets.UTF_8.name() > JDK 7
+		requestBody = result.toString("UTF-8");
+	    }
             Handler sut = new Handler();
-            String response = sut.Handle("test");
+            String response = sut.Handle(requestBody);
 
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
