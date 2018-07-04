@@ -1,2 +1,3 @@
 language: java
-fprocess: java -classpath ./libs/com.squareup.okio.jar:./libs/com.squareup.okhttp3.jar:./libs/com.openfaas.jar:./build/libs/java8-gradle.jar App
+#fprocess: java -classpath "./build/libs/java8-gradle.jar;./libs/*" App
+#fprocess: java -classpath ./libs/com.squareup.okio.jar:./libs/com.squareup.okhttp3.jar:./libs/com.openfaas.jar:./build/libs/java8-gradle.jar App
