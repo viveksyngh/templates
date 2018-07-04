@@ -15,19 +15,19 @@ COPY . /home/app/
 
 WORKDIR /home/app/function/
 RUN chmod +x ./gradlew
-RUN ./gradlew build
+RUN ./gradlew shadowjar
 WORKDIR /home/app/
 
 RUN cp -r ./function/build/libs/* ./libs/
 RUN chmod +x ./gradlew
-RUN ./gradlew build
+RUN ./gradlew shadowjar
 
 RUN chown -R app /home/app
 USER app
 
 ENV upstream_url="http://127.0.0.1:8081"
 ENV mode="http"
-ENV fprocess="java -classpath ./build/libs/java8-gradle.jar:./libs/* App"
+ENV fprocess="java -classpath ./build/libs/java8-gradle-all.jar:./lib/* App"
 
 HEALTHCHECK --interval=2s CMD [ -e /tmp/.lock ] || exit 1
 

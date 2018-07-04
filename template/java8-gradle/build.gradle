@@ -12,13 +12,14 @@ plugins {
 
     // Apply the application plugin to add support for building an application
     id 'application'
+    id 'com.github.johnrengelman.shadow' version '2.0.4'
 }
 
 // Define the main class for the application
 mainClassName = 'App'
 
 dependencies {
-    compile files('libs/com.openfaas.jar')
+    compile files('libs/com.openfaas-all.jar')
 
     // This dependency is found on compile classpath of this component and consumers.
     compile 'com.google.guava:guava:23.0'
@@ -29,4 +30,7 @@ repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
     jcenter()
+    flatDir {
+        dirs 'libs' 
+    }
 }
