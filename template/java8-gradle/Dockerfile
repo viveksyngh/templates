@@ -7,7 +7,7 @@ RUN apk --no-cache add curl \
     && apk del curl --no-cache
 
 RUN addgroup -S app && adduser -S -g app app
-RUN mkdir -p /home/app
+RUN mkdir -p /home/app/libs
 
 WORKDIR /home/app
 
